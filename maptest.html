@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<link href="lib/leaflet/leaflet.css" rel="stylesheet" />
+<link href="lib/leaflet.fullscreen.css" rel="stylesheet" />
+<script src="lib/leaflet/leaflet.js"></script>
+
+<style type="text/css">
+  html, body, #map {
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+  }
+</style>
+</head>
+<div id="map"></div>
+
+<script src="https://d1tdp7z6w94jbb.cloudfront.net/js/jquery-3.3.1.min.js" type="text/javascript" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="js/BetterWMS.js"></script>
+<script>
+var basin_map = L.map('map', {
+    center: [34,-111],
+    zoom: 7
+});
+  var wms_url = "https://www.hydroclim.org/geoserver/wms?";
+  var basin = new L.TileLayer.BetterWMS(wms_url,
+      {
+          layers: "hydroclim:BasinsV2",
+          format: 'image/png',
+          transparent: true,
+          zIndex: 50,
+          tiled: true,
+          version:"1.1.1"
+      }
+  ).addTo(basin_map);
+var geoJsonLayerGoup = new L.LayerGroup().addTo(basin_map)
+</script>
+</body>
+</html>
